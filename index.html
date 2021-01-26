@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+
+    <style>
+
+        body{
+            font-family: sans-serif, Helvetica, sans-serif;
+        }
+
+        p{
+            display: none;
+            font-weight: bold;
+        }
+
+        .wrong{
+            color: rgb(141, 18, 18);
+        }
+
+        .correct{
+            color: rgb(18, 145, 73);
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+
+    <script>
+
+        var json = {
+            "quiz": {
+                "q1": {
+                    "question": "Which one is correct team name in NBA?",
+                    "options": [
+                        "New York Bulls",
+                        "Los Angeles Kings",
+                        "Golden State Warriros",
+                        "Huston Rocket"
+                    ],
+                    "answer": "Huston Rocket"
+                },
+                "q2": {
+                    "question": "'Namaste' is a traditional greeting in which Asian language?",
+                    "options": [
+                        "Hindi",
+                        "Mandarin",
+                        "Nepalese",
+                        "Thai"
+                    ],
+                    "answer": "Hindi"
+                },
+                "q3": {
+                    "question": "The Spree river flows through which major European capital city?",
+                    "options": [
+                        "Berlin",
+                        "Paris",
+                        "Rome",
+                        "London"
+                    ],
+                    "answer": "Berlin"
+                },
+                "q4": {
+                    "question": "Which famous artist had both a 'Rose Period' and a 'Blue Period'?",
+                    "options": [
+                        "Pablo Picasso",
+                        "Vincent van Gogh",
+                        "Salvador Dalí",
+                        "Edgar Degas"
+                    ],
+                    "answer": "Pablo Picasso"
+                }
+            }
+        };
+
+
+
+        console.log(json);
+
+
+
+        document.body.innerHTML += '<h2 id="q1"> Question 1:' + json.quiz.q1.question + '</h2>';
+
+        for (let i = 0; i < json.quiz.q1.options.length; i++) {
+            document.body.innerHTML += '<input type="radio" name="question1" class="answer1" >' + json.quiz.q1.options[i] + '</input>' + '<br>';
+            document.getElementsByClassName("answer1")[i].setAttribute("value", json.quiz.q1.options[i]);
+
+        }
+
+        document.body.innerHTML += '<p id="p1w"> Wrong! Correct answer is: ' + json.quiz.q1.answer + '</p>';
+        document.body.innerHTML += '<p id="p1c"> Correct! </p>';
+
+        document.body.innerHTML += '<h2 id="q2"> Question 2:' + json.quiz.q2.question + '</h2>';
+
+        for (let i = 0; i < json.quiz.q1.options.length; i++) {
+            document.body.innerHTML += '<input type="radio" name="question2" class="answer2">' + json.quiz.q2.options[i] + '</input>' + '<br>';
+            document.getElementsByClassName("answer2")[i].setAttribute("value", json.quiz.q2.options[i]);
+
+        }
+
+        document.body.innerHTML += '<p id="p2w"> Wrong! Correct answer is: ' + json.quiz.q2.answer + '</p>';
+        document.body.innerHTML += '<p id="p2c"> Correct! </p>';
+
+        document.body.innerHTML += '<h2 id="q3"> Question 3:' + json.quiz.q3.question + '</h2>';
+
+        for (let i = 0; i < json.quiz.q1.options.length; i++) {
+            document.body.innerHTML += '<input type="radio" name="question3" class="answer3">' + json.quiz.q3.options[i] + '</input>' + '<br>';
+            document.getElementsByClassName("answer3")[i].setAttribute("value", json.quiz.q3.options[i]);
+
+        }
+
+        document.body.innerHTML += '<p id="p3w"> Wrong! Correct answer is: ' + json.quiz.q3.answer + '</p>';
+        document.body.innerHTML += '<p id="p3c"> Correct! </p>';
+
+        document.body.innerHTML += '<h2 id="q4"> Question 4:' + json.quiz.q4.question + '</h2>';
+
+        for (let i = 0; i < json.quiz.q1.options.length; i++) {
+            document.body.innerHTML += '<input type="radio" name="question4" class="answer4">' + json.quiz.q4.options[i] + '</input>' + '<br>';
+            document.getElementsByClassName("answer4")[i].setAttribute("value", json.quiz.q4.options[i]);
+
+        }
+
+        document.body.innerHTML += '<p id="p4w"> Wrong! Correct answer is: ' + json.quiz.q4.answer + '</p>';
+        document.body.innerHTML += '<p id="p4c"> Correct! </p>';
+
+        document.body.innerHTML += '<br>';
+        document.body.innerHTML += '<br>';
+
+
+        var btn = document.createElement("BUTTON");
+        btn.innerHTML = "Submit";
+        document.body.appendChild(btn);
+
+
+
+
+
+
+
+        btn.onclick = function () {
+
+            // for question1
+
+            var input1 = document.getElementsByClassName("answer1");
+
+            for (let i = 0; i < input1.length; i++) {
+                var answer1 = input1[i];
+
+                if (answer1.checked == true) {
+
+                    localStorage.setItem("answer1", answer1.value);
+
+                    if(answer1.value==json.quiz.q1.answer){
+                      var p1 = document.getElementById("p1c");
+                      p1.style.display = "block";
+                      p1.classList.add("correct");
+                      document.getElementById("q1").classList.add("correct");
+                       
+                    }
+                    else{
+                        document.getElementById("p1w").style.display = "block";
+                        document.getElementById("p1w").classList.add("wrong");
+                        document.getElementById("q1").classList.add("wrong");
+                    }
+
+                    
+                }
+
+            }
+
+            // for question2
+
+            var input2 = document.getElementsByClassName("answer2");
+
+            for (let i = 0; i < input2.length; i++) {
+                var answer2 = input2[i];
+
+                if (answer2.checked == true) {
+
+                    localStorage.setItem("answer2", answer2.value);
+
+                    if(answer2.value==json.quiz.q2.answer){
+                      document.getElementById("p2c").style.display = "block"; 
+                      document.getElementById("p2c").classList.add("correct");
+                      document.getElementById("q2").classList.add("correct");
+                       
+                    }
+                    else{
+                        document.getElementById("p2w").style.display = "block";
+                        document.getElementById("p2w").classList.add("wrong");
+                        document.getElementById("q2").classList.add("wrong");
+                    }
+
+                  
+                }
+
+            }
+
+            // for question3
+
+            var input3 = document.getElementsByClassName("answer3");
+
+            for (let i = 0; i < input3.length; i++) {
+                var answer3 = input3[i];
+
+                if (answer3.checked == true) {
+
+                    localStorage.setItem("answer3", answer3.value);
+
+                    if(answer3.value==json.quiz.q3.answer){
+                      document.getElementById("p3c").style.display = "block"; 
+                      document.getElementById("p3c").classList.add("correct");
+                      document.getElementById("q3").classList.add("correct");
+                       
+                    }
+                    else{
+                        document.getElementById("p3w").style.display = "block";
+                        document.getElementById("p3w").classList.add("wrong");
+                        document.getElementById("q3").classList.add("wrong");
+                    }
+
+                
+                }
+
+            }
+
+            // for question4
+
+            var input4 = document.getElementsByClassName("answer4");
+
+            for (let i = 0; i < input4.length; i++) {
+                var answer4 = input4[i];
+
+                if (answer4.checked == true) {
+
+                    localStorage.setItem("answer4", answer4.value);
+
+                    if(answer4.value==json.quiz.q4.answer){
+                      document.getElementById("p4c").style.display = "block"; 
+                      document.getElementById("p4c").classList.add("correct");
+                      document.getElementById("q4").classList.add("correct");
+                       
+                    }
+                    else{
+                        document.getElementById("p4w").style.display = "block";
+                        document.getElementById("p4w").classList.add("wrong");
+                        document.getElementById("q4").classList.add("wrong");
+                    }
+
+                
+                }
+
+            }
+
+
+        }
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
